@@ -48,6 +48,10 @@ def get_moves(v, dir):
 
     return moves
 
+def get_backwards_moves(v, dir):
+
+    return
+
 def make_path(parents, v):
     # make a path out of parent dictionary
     if v not in parents:
@@ -132,17 +136,40 @@ def dfs(maze, pos=0):
                 parents[move] = state
     return False
 
-def modified_search():
-    return
+def modified_search(maze, goal, fwd_pos, fwd_stack, bck_pos, bck_q):
+    # maze: array containing the maze structure, a list containing vetecies and their edges
+    # pos: starting index in the maze
+    #
+    # I think I'll do dfs with a 3 depth bfs look ahead when there is more than 1 option
+    # I'll do more than one option because there is a maximum of 4 options, 
+    # and the paths can branch drastically with just one turn
+    #
+    # Maybe I can also do a backwards search too
+    #
+    # Implemented using recursion?
+    # 
+    # Make each recursion perform a forward step, check if we should look ahead (look ahead does not look backwards), then do a backward step.
+    # They all work on the same visited set and parent dictionary. Backwards search going 
+    # 
+
+    # pos pointing north
+    fwd_dir = 0
+    fwd_state = (fwd_pos, dir)
+    fwd_stack = [fwd_state]
+
+    return False
 
 def main():
     file = open('maze1.txt')
     maze = read_maze(file)
+    goal = maze[-1][0]
 
     bfs_path = bfs(maze)
     print(bfs_path)
     dfs_path = dfs(maze)
     print(dfs_path)
+    ms_path = modified_search(maze, goal)
+    print(ms_path)
     
     return
 
