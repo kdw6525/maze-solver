@@ -6,6 +6,9 @@
 # 
 # a function to print out the maze in a readable format :)
 #
+#
+# BUG: EDGES THAT TRAVERSE MORE THAN 2 IN A DIRECTION ARE A PROBLEM
+# TODO FIX: ADD GRID DATA INTO THE MAZE STRUCTURE
 
 def read_maze(file):
     # read file into graph like structure
@@ -90,6 +93,7 @@ def get_char_neighbors(state, x, y):
             neighbors.append((neighbor, (x-1, y)))
 
     return get_char(directions), neighbors
+    # return str(state[0]), neighbors
 
 def get_matrix(maze):
     # (hardest part of the function)
@@ -148,12 +152,16 @@ def main():
     maze = read_maze(file)
 
     matrix = get_matrix(maze)
+    s = ''
     for row in matrix:
-        # s = ''
-        # for val in row:
-        #     s += val
-        # print(s)
+        
+        for val in row:
+            s += val
+        s += '\n'
         print(row)
+    print(s)
+
+    print(get_char_neighbors(maze[4], x=0, y=4))
     return
 
 if __name__ == '__main__':
